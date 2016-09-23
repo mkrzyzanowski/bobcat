@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package com.cognifide.qa.bb.fluent;
+package com.cognifide.qa.bb.dsl;
 
 import java.util.Properties;
 
@@ -27,7 +27,8 @@ import org.junit.Test;
 import com.cognifide.qa.bb.dsl.expectation.ExpectationException;
 import com.cognifide.qa.bb.page.PageFactory;
 
-public class FluentTest {
+public class FluentApiTest {
+
 
   //Should be removed in future
   @BeforeClass

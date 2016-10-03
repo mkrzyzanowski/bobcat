@@ -79,7 +79,6 @@ public class Page {
     this.queries = queries;
   }
 
-  //TODO - should check if key already exists and add that query
   public void addQuery(String key, String value) {
     queries.append(key)
         .append("=")

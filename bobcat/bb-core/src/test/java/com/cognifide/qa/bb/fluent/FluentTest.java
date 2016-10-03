@@ -25,6 +25,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.cognifide.qa.bb.dsl.expectation.ExpectationException;
+import com.cognifide.qa.bb.dsl.implementations.PathImpl;
 import com.cognifide.qa.bb.page.PageFactory;
 
 public class FluentTest {
@@ -41,6 +42,7 @@ public class FluentTest {
     PageFactory.page()
         .protocol("http")
         .host("www.onet.pl")
+        .path(PathImpl.ROOT_PATH)
         .open();
   }
 

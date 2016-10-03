@@ -21,5 +21,5 @@ package com.cognifide.qa.bb.dsl.interfaces;
 
 public interface Host {
 
-  PathQueryExpected host(String host);
+  Path host(String host);
 }

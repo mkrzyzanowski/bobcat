@@ -23,7 +23,7 @@ import com.cognifide.qa.bb.dsl.interfaces.Path;
 import com.cognifide.qa.bb.dsl.interfaces.Query;
 import com.cognifide.qa.bb.page.Page;
 
-public class PathImpl extends QueryImpl implements Path {
+public class PathImpl extends Condition implements Path {
 
   public PathImpl(Page page) {
     super(page);

@@ -20,5 +20,6 @@
 package com.cognifide.qa.bb.dsl.interfaces;
 
 public interface Protocol {
+
   Host protocol(String protocol);
 }

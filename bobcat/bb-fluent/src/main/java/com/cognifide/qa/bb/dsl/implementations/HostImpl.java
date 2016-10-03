@@ -20,7 +20,7 @@
 package com.cognifide.qa.bb.dsl.implementations;
 
 import com.cognifide.qa.bb.dsl.interfaces.Host;
-import com.cognifide.qa.bb.dsl.interfaces.PathQueryExpected;
+import com.cognifide.qa.bb.dsl.interfaces.Path;
 import com.cognifide.qa.bb.page.Page;
 
 public class HostImpl extends Condition implements Host {
@@ -30,8 +30,8 @@ public class HostImpl extends Condition implements Host {
   }
 
   @Override
-  public PathQueryExpected host(String host) {
+  public Path host(String host) {
     page.setHost(host);
-    return new PathQueryExpectedImpl(page);
+    return new PathImpl(page);
   }
 }

@@ -25,10 +25,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.cognifide.qa.bb.dsl.expectation.ExpectationException;
+import com.cognifide.qa.bb.dsl.interfaces.Path;
 import com.cognifide.qa.bb.page.PageFactory;
 
 public class FluentApiTest {
-
 
   //Should be removed in future
   @BeforeClass
@@ -42,6 +42,7 @@ public class FluentApiTest {
     PageFactory.page()
         .protocol("http")
         .host("www.onet.pl")
+        .path(Path.ROOT_PATH)
         .open();
   }
 

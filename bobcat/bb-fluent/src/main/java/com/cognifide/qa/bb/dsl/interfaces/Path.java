@@ -19,7 +19,9 @@
  */
 package com.cognifide.qa.bb.dsl.interfaces;
 
-public interface Path extends Query {
+public interface Path {
+
+  String ROOT_PATH = "/";
 
   Query path(String path);
 }

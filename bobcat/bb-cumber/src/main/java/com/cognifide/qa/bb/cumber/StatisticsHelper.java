@@ -33,21 +33,6 @@ class StatisticsHelper {
 
   private static final Logger LOG = LoggerFactory.getLogger(StatisticsHelper.class);
 
-  private int getNumberOfTests(File file) {
-    return getNumberOfTests(file, 0);
-  }
-
-  private int getNumberOfTests(File file, int defaultValue) {
-    int returnValue = defaultValue;
-    try {
-      Scanner scanner = new Scanner(file);
-      returnValue = nextInt(scanner);
-    } catch (FileNotFoundException e) {
-      LOG.warn(NO_STATISTICS_FILE_FOUND_MESSAGE);
-    }
-    return returnValue;
-  }
-
   int getNumberOfFailedTests(File file) {
     return getNumberOfFailedTests(file, 0);
   }
@@ -75,6 +60,21 @@ class StatisticsHelper {
       result = ((double)getNumberOfFailedTests(file) / numberOfTests) * 100;
     }
     return result;
+  }
+
+  private int getNumberOfTests(File file) {
+    return getNumberOfTests(file, 0);
+  }
+
+  private int getNumberOfTests(File file, int defaultValue) {
+    int returnValue = defaultValue;
+    try {
+      Scanner scanner = new Scanner(file);
+      returnValue = nextInt(scanner);
+    } catch (FileNotFoundException e) {
+      LOG.warn(NO_STATISTICS_FILE_FOUND_MESSAGE);
+    }
+    return returnValue;
   }
 
   private int nextInt(Scanner scanner) {

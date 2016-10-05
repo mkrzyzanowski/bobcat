@@ -20,17 +20,17 @@
 package com.cognifide.qa.bb.dsl.implementations;
 
 import com.cognifide.qa.bb.dsl.interfaces.Query;
-import com.cognifide.qa.bb.page.Page;
+import com.cognifide.qa.bb.page.PageModel;
 
 public class QueryImpl extends ExpectedImpl implements Query {
 
-  public QueryImpl(Page page) {
-    super(page);
+  public QueryImpl(PageModel pageModel) {
+    super(pageModel);
   }
 
   @Override
   public Query query(String key, String value) {
-    page.addQuery(key, value);
+    pageModel.addQuery(key, value);
     return this;
   }
 }

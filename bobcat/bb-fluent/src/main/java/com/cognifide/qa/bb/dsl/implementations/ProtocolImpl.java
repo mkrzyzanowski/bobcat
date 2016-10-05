@@ -21,17 +21,17 @@ package com.cognifide.qa.bb.dsl.implementations;
 
 import com.cognifide.qa.bb.dsl.interfaces.Host;
 import com.cognifide.qa.bb.dsl.interfaces.Protocol;
-import com.cognifide.qa.bb.page.Page;
+import com.cognifide.qa.bb.page.PageModel;
 
 public class ProtocolImpl extends Condition implements Protocol {
 
-  public ProtocolImpl(Page page) {
-    super(page);
+  public ProtocolImpl(PageModel pageModel) {
+    super(pageModel);
   }
 
   @Override
   public Host protocol(String protocol) {
-    page.setProtocol(protocol);
-    return new HostImpl(page);
+    pageModel.setProtocol(protocol);
+    return new HostImpl(pageModel);
   }
 }

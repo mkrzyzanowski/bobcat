@@ -17,9 +17,14 @@
  * limitations under the License.
  * #L%
  */
-package com.cognifide.qa.bb.dsl.interfaces;
+package com.cognifide.qa.bb.dsl.exceptions;
 
-public interface Named {
+public class NamedPageNotFound extends Exception {
+  public NamedPageNotFound(String message) {
+    super(message);
+  }
 
-  Open named(String named);
+  public NamedPageNotFound() {
+    super("Specified page wasn't found.");
+  }
 }

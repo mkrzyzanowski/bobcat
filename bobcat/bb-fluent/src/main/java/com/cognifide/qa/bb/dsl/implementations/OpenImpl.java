@@ -24,24 +24,27 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import com.cognifide.qa.bb.dsl.expectation.Expectation;
-import com.cognifide.qa.bb.dsl.expectation.ExpectationException;
+import com.cognifide.qa.bb.dsl.exceptions.ExpectationException;
+import com.cognifide.qa.bb.dsl.interfaces.Expectation;
 import com.cognifide.qa.bb.dsl.interfaces.Open;
-import com.cognifide.qa.bb.page.Page;
+import com.cognifide.qa.bb.page.PageModel;
 
 public class OpenImpl extends Condition implements Open {
 
-  private WebDriver webDriver;
+  private static WebDriver webDriver;
 
-  public OpenImpl(Page page) {
-    super(page);
-    webDriver = new ChromeDriver();
+  public OpenImpl(PageModel pageModel) {
+    super(pageModel);
+    if (webDriver == null) {
+      webDriver = new ChromeDriver();
+    }
   }
 
   @Override
   public void open() throws ExpectationException {
-    webDriver.get(page.toString());
-    Map<Expectation, String> expectations = page.getExpectations();
+    webDriver.manage().window().maximize();
+    webDriver.get(pageModel.toString());
+    Map<Expectation, String> expectations = pageModel.getExpectations();
     for (Expectation e : expectations.keySet()) {
       if (!e.expected(webDriver)) {
         throw new ExpectationException(expectations.get(e));

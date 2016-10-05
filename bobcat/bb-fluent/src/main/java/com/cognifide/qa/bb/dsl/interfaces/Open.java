@@ -19,7 +19,7 @@
  */
 package com.cognifide.qa.bb.dsl.interfaces;
 
-import com.cognifide.qa.bb.dsl.expectation.ExpectationException;
+import com.cognifide.qa.bb.dsl.exceptions.ExpectationException;
 
 public interface Open {
 

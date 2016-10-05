@@ -19,89 +19,39 @@
  */
 package com.cognifide.qa.bb.page;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import com.cognifide.qa.bb.dsl.expectation.Expectation;
+import com.cognifide.qa.bb.dsl.exceptions.NamedPageNotFound;
+import com.cognifide.qa.bb.dsl.implementations.OpenImpl;
+import com.cognifide.qa.bb.dsl.implementations.ProtocolImpl;
+import com.cognifide.qa.bb.dsl.implementations.QueryImpl;
+import com.cognifide.qa.bb.dsl.interfaces.Open;
+import com.cognifide.qa.bb.dsl.interfaces.Protocol;
+import com.cognifide.qa.bb.dsl.interfaces.Query;
 
 public class Page {
 
-  private String host = "";
+  public static PageModel currentPage = null;
 
-  private String protocol = "";
-
-  private String path = "";
-
-  private StringBuilder queries = new StringBuilder();
-
-  private Map<Expectation, String> expectations = new HashMap<>();
-
-  public Page() {
+  public static Protocol page() {
+    PageModel pageModel = new PageModel();
+    registerPage(pageModel);
+    return new ProtocolImpl(pageModel);
   }
 
-  public String getHost() {
-    return host;
+  public static Query page(String protocol, String host, String path) {
+    PageModel pageModel = PageModel.builder()
+        .protocol(protocol)
+        .host(host)
+        .path(path)
+        .build();
+    registerPage(pageModel);
+    return new QueryImpl(pageModel);
   }
 
-  public void setHost(String host) {
-    this.host = host;
+  public static Open named(String named) throws NamedPageNotFound {
+    return new OpenImpl(NamedFactory.getPage(named));
   }
 
-  public String getProtocol() {
-    return protocol;
-  }
-
-  public void setProtocol(String protocol) {
-    this.protocol = protocol;
-  }
-
-  public String getPath() {
-    return path;
-  }
-
-  public void setPath(String path) {
-    this.path = path;
-  }
-
-  public Map<Expectation, String> getExpectations() {
-    return expectations;
-  }
-
-  public void setExpectations(Map<Expectation, String> expectations) {
-    this.expectations = expectations;
-  }
-
-  public StringBuilder getQueries() {
-    return queries;
-  }
-
-  public void setQueries(StringBuilder queries) {
-    this.queries = queries;
-  }
-
-  public void addQuery(String key, String value) {
-    queries.append(key)
-        .append("=")
-        .append(value)
-        .append("&");
-  }
-
-  @Override
-  public String toString() {
-    String path = this.path.startsWith("/") ? this.path : "/" + this.path;
-    String queries = anyQuery() ? "?" + queriesAsString() : "";
-    return protocol + "://" + host + path + queries;
-  }
-
-  private boolean anyQuery() {
-    return queries != null && !(queries.length() == 0);
-  }
-
-  private String queriesAsString() {
-    return queries.substring(0, queries.length() - 1);
-  }
-
-  public void addExpectation(Expectation expectation, String failureMessage) {
-    expectations.put(expectation, failureMessage);
+  private static void registerPage(PageModel pageModel) {
+    currentPage = pageModel;
   }
 }

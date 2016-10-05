@@ -21,17 +21,17 @@ package com.cognifide.qa.bb.dsl.implementations;
 
 import com.cognifide.qa.bb.dsl.interfaces.Host;
 import com.cognifide.qa.bb.dsl.interfaces.Path;
-import com.cognifide.qa.bb.page.Page;
+import com.cognifide.qa.bb.page.PageModel;
 
 public class HostImpl extends Condition implements Host {
 
-  public HostImpl(Page page) {
-    super(page);
+  public HostImpl(PageModel pageModel) {
+    super(pageModel);
   }
 
   @Override
   public Path host(String host) {
-    page.setHost(host);
-    return new PathImpl(page);
+    pageModel.setHost(host);
+    return new PathImpl(pageModel);
   }
 }

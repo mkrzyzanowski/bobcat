@@ -24,9 +24,9 @@ import java.util.Properties;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.cognifide.qa.bb.dsl.expectation.ExpectationException;
+import com.cognifide.qa.bb.dsl.exceptions.ExpectationException;
 import com.cognifide.qa.bb.dsl.interfaces.Path;
-import com.cognifide.qa.bb.page.PageFactory;
+import com.cognifide.qa.bb.page.Page;
 
 public class FluentApiTest {
 
@@ -39,7 +39,7 @@ public class FluentApiTest {
 
   @Test
   public void openPageTest() throws ExpectationException {
-    PageFactory.page()
+    Page.page()
         .protocol("http")
         .host("www.onet.pl")
         .path(Path.ROOT_PATH)
@@ -48,7 +48,7 @@ public class FluentApiTest {
 
   @Test
   public void openPageWithPathTest() throws ExpectationException {
-    PageFactory.page()
+    Page.page()
         .protocol("https")
         .host("www.absa.co.za")
         .path("personal/save-invest/saving-for-retirement/explore")
@@ -57,7 +57,7 @@ public class FluentApiTest {
 
   @Test
   public void openPageWithQueryTest() throws ExpectationException {
-    PageFactory.page()
+    Page.page()
         .protocol("https")
         .host("www.absa.co.za")
         .path("/search-results")
@@ -67,10 +67,10 @@ public class FluentApiTest {
 
   @Test
   public void openPageWithMultipleQueryTest() throws ExpectationException {
-    PageFactory.page()
+    Page.page()
         .protocol("https")
         .host("www.absa.co.za")
-        .path("/search-results")
+        .path("search-results")
         .query("q", "absa")
         .query("q", "blabla")
         .query("foo", "bar")
@@ -80,7 +80,7 @@ public class FluentApiTest {
   @Test
   public void openPageWithExpectedConditionTest() throws ExpectationException {
     String expectedTitle = "Search Results";
-    PageFactory.page()
+    Page.page()
         .protocol("https")
         .host("www.absa.co.za")
         .path("/search-results")
@@ -92,7 +92,7 @@ public class FluentApiTest {
   @Test(expected = ExpectationException.class)
   public void openPageWithExpectedConditionAndFailTest() throws ExpectationException {
     String expectedTitle = "Wrong title";
-    PageFactory.page()
+    Page.page()
         .protocol("https")
         .host("www.absa.co.za")
         .path("/search-results")

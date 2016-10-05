@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package com.cognifide.qa.bb.dsl.expectation;
+package com.cognifide.qa.bb.dsl.interfaces;
 
 import org.openqa.selenium.WebDriver;
 

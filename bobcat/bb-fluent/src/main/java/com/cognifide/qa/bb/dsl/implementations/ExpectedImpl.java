@@ -19,16 +19,16 @@
  */
 package com.cognifide.qa.bb.dsl.implementations;
 
-import com.cognifide.qa.bb.dsl.expectation.Expectation;
-import com.cognifide.qa.bb.dsl.expectation.ExpectationException;
+import com.cognifide.qa.bb.dsl.exceptions.ExpectationException;
+import com.cognifide.qa.bb.dsl.interfaces.Expectation;
 import com.cognifide.qa.bb.dsl.interfaces.Expected;
 import com.cognifide.qa.bb.dsl.interfaces.Open;
-import com.cognifide.qa.bb.page.Page;
+import com.cognifide.qa.bb.page.PageModel;
 
 public class ExpectedImpl extends Condition implements Expected {
 
-  public ExpectedImpl(Page page) {
-    super(page);
+  public ExpectedImpl(PageModel pageModel) {
+    super(pageModel);
   }
 
   @Override
@@ -38,13 +38,43 @@ public class ExpectedImpl extends Condition implements Expected {
 
   @Override
   public Expected expected(Expectation expectation, String failureMessage) {
-    page.addExpectation(expectation, failureMessage);
+    pageModel.addExpectation(expectation, failureMessage);
+    return this;
+  }
+
+  @Override
+  public Expected expectedPath(String path) {
+    return expectedPath(path, "There was a different path, than " + path);
+  }
+
+  @Override
+  public Expected expectedPath(String path, String failureMessage) {
+    pageModel.addExpectation(webDriver -> {
+      StringBuilder stringBuilder = new StringBuilder();
+      stringBuilder.append(pageModel.getProtocol())
+          .append("//")
+          .append(pageModel.getHost())
+          .append(path.startsWith("/") ? path : "/" + path);
+      String expectedUrl = stringBuilder.toString();
+      return webDriver.getCurrentUrl().equals(expectedUrl);
+    }, failureMessage);
+    return this;
+  }
+
+  @Override
+  public Expected expectedTitle(String title) {
+    return expectedTitle(title, "There was a different page title than expected " + title);
+  }
+
+  @Override
+  public Expected expectedTitle(String title, String failureMessage) {
+    pageModel.addExpectation(webDriver -> webDriver.getTitle().equals(title), failureMessage);
     return this;
   }
 
   @Override
   public void open() throws ExpectationException {
-    Open open = new OpenImpl(page);
+    Open open = new OpenImpl(pageModel);
     open.open();
   }
 }

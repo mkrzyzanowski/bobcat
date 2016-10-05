@@ -24,9 +24,10 @@ import java.util.Properties;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.cognifide.qa.bb.dsl.expectation.ExpectationException;
+import com.cognifide.qa.bb.dsl.exceptions.ExpectationException;
+import com.cognifide.qa.bb.dsl.exceptions.NamedPageNotFound;
 import com.cognifide.qa.bb.dsl.implementations.PathImpl;
-import com.cognifide.qa.bb.page.PageFactory;
+import com.cognifide.qa.bb.page.Page;
 
 public class FluentTest {
 
@@ -39,7 +40,7 @@ public class FluentTest {
 
   @Test
   public void openPageTest() throws ExpectationException {
-    PageFactory.page()
+    Page.page()
         .protocol("http")
         .host("www.onet.pl")
         .path(PathImpl.ROOT_PATH)
@@ -48,7 +49,7 @@ public class FluentTest {
 
   @Test
   public void openPageWithPathTest() throws ExpectationException {
-    PageFactory.page()
+    Page.page()
         .protocol("https")
         .host("www.absa.co.za")
         .path("personal/save-invest/saving-for-retirement/explore")
@@ -57,7 +58,7 @@ public class FluentTest {
 
   @Test
   public void openPageWithQueryTest() throws ExpectationException {
-    PageFactory.page()
+    Page.page()
         .protocol("https")
         .host("www.absa.co.za")
         .path("/search-results")
@@ -67,7 +68,7 @@ public class FluentTest {
 
   @Test
   public void openPageWithMultipleQueryTest() throws ExpectationException {
-    PageFactory.page()
+    Page.page()
         .protocol("https")
         .host("www.absa.co.za")
         .path("/search-results")
@@ -80,7 +81,7 @@ public class FluentTest {
   @Test
   public void openPageWithExpectedConditionTest() throws ExpectationException {
     String expectedTitle = "Search Results";
-    PageFactory.page()
+    Page.page()
         .protocol("https")
         .host("www.absa.co.za")
         .path("/search-results")
@@ -92,12 +93,18 @@ public class FluentTest {
   @Test(expected = ExpectationException.class)
   public void openPageWithExpectedConditionAndFailTest() throws ExpectationException {
     String expectedTitle = "Wrong title";
-    PageFactory.page()
+    Page.page()
         .protocol("https")
         .host("www.absa.co.za")
         .path("/search-results")
         .query("q", "absa")
         .expected(webDriver -> webDriver.getTitle().equals(expectedTitle))
+        .open();
+  }
+
+  @Test
+  public void openNamedPage() throws ExpectationException, NamedPageNotFound {
+    Page.named("absa-search")
         .open();
   }
 }

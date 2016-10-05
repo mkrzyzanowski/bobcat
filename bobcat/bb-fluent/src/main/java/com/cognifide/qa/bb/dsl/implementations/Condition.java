@@ -19,13 +19,13 @@
  */
 package com.cognifide.qa.bb.dsl.implementations;
 
-import com.cognifide.qa.bb.page.Page;
+import com.cognifide.qa.bb.page.PageModel;
 
 public class Condition {
 
-  protected Page page;
+  protected PageModel pageModel;
 
-  protected Condition(Page page) {
-    this.page = page;
+  protected Condition(PageModel pageModel) {
+    this.pageModel = pageModel;
   }
 }

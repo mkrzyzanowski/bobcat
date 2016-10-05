@@ -19,11 +19,17 @@
  */
 package com.cognifide.qa.bb.dsl.interfaces;
 
-import com.cognifide.qa.bb.dsl.expectation.Expectation;
-
 public interface Expected extends Open {
 
   Expected expected(Expectation expectation);
 
   Expected expected(Expectation expectation, String failureMessage);
+
+  Expected expectedPath(String path);
+
+  Expected expectedPath(String path, String failureMessage);
+
+  Expected expectedTitle(String title);
+
+  Expected expectedTitle(String title, String failureMessage);
 }

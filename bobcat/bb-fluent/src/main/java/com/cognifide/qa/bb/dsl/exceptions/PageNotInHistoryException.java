@@ -17,10 +17,10 @@
  * limitations under the License.
  * #L%
  */
-package com.cognifide.qa.bb.dsl.expectation;
+package com.cognifide.qa.bb.dsl.exceptions;
 
-public class ExpectationException extends Exception {
-  public ExpectationException(String failureMessage) {
-    super(failureMessage);
+public class PageNotInHistoryException extends Exception {
+  public PageNotInHistoryException() {
+    super("Specified page doesn't exists in history.");
   }
 }

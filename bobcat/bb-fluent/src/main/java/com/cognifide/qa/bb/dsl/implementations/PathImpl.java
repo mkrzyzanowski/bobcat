@@ -21,17 +21,17 @@ package com.cognifide.qa.bb.dsl.implementations;
 
 import com.cognifide.qa.bb.dsl.interfaces.Path;
 import com.cognifide.qa.bb.dsl.interfaces.Query;
-import com.cognifide.qa.bb.page.Page;
+import com.cognifide.qa.bb.page.PageModel;
 
 public class PathImpl extends Condition implements Path {
 
-  public PathImpl(Page page) {
-    super(page);
+  public PathImpl(PageModel pageModel) {
+    super(pageModel);
   }
 
   @Override
   public Query path(String path) {
-    page.setPath(path);
-    return new QueryImpl(page);
+    pageModel.setPath(path);
+    return new QueryImpl(pageModel);
   }
 }

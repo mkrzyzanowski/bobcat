@@ -17,18 +17,10 @@
  * limitations under the License.
  * #L%
  */
-package com.cognifide.qa.bb.dsl.implementations;
+package com.cognifide.qa.bb.dsl.exceptions;
 
-import com.cognifide.qa.bb.dsl.interfaces.Named;
-import com.cognifide.qa.bb.dsl.interfaces.Open;
-import com.cognifide.qa.bb.page.Page;
-
-public class NamedImpl implements Named {
-
-  private Page page;
-
-  @Override
-  public Open named(String named) {
-    return null;
+public class ExpectationException extends Exception {
+  public ExpectationException(String failureMessage) {
+    super(failureMessage);
   }
 }

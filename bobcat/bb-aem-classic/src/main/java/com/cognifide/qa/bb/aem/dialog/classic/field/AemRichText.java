@@ -120,7 +120,7 @@ public class AemRichText implements Configurable {
       actions.sendKeys(text).perform();
       return this;
     } finally {
-      frameSwitcher.switchTo("/$cq");
+      frameSwitcher.switchBack();
     }
   }
 
@@ -141,7 +141,7 @@ public class AemRichText implements Configurable {
       }, 2);
       return this;
     } finally {
-      frameSwitcher.switchTo("/$cq");
+      frameSwitcher.switchBack();
     }
   }
 
@@ -175,7 +175,7 @@ public class AemRichText implements Configurable {
       actions.sendKeys(Keys.chord(Keys.CONTROL, "a")).perform();
       return this;
     } finally {
-      frameSwitcher.switchTo("/$cq");
+      frameSwitcher.switchBack();
     }
   }
 
@@ -207,7 +207,7 @@ public class AemRichText implements Configurable {
     try {
       return webDriver.findElement(By.xpath(".//body")).getText();
     } finally {
-      frameSwitcher.switchTo("/$cq");
+      frameSwitcher.switchBack();
     }
   }
 
@@ -232,7 +232,7 @@ public class AemRichText implements Configurable {
       actions.keyUp(Keys.SHIFT).perform();
       return this;
     } finally {
-      frameSwitcher.switchTo("/$cq");
+      frameSwitcher.switchBack();
     }
   }
 
@@ -244,7 +244,7 @@ public class AemRichText implements Configurable {
     try {
       return webDriver.findElement(By.xpath(".//body")).getAttribute(INNER_HTML_ATTRIBUTE);
     } finally {
-      frameSwitcher.switchTo("/$cq");
+      frameSwitcher.switchBack();
     }
   }
 
@@ -267,7 +267,7 @@ public class AemRichText implements Configurable {
   private String getTextAreaInnerHtml() {
     switchToTextArea();
     String value = webDriver.switchTo().activeElement().getAttribute(INNER_HTML_ATTRIBUTE);
-    frameSwitcher.switchTo("/$cq");
+    frameSwitcher.switchBack();
     return value;
   }
 
